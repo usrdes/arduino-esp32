@@ -1,37 +1,35 @@
-Please fill the info fields, it helps to get you faster support ;)
-
-If you have a Guru Meditation Error, please decode it:
-https://github.com/me-no-dev/EspExceptionDecoder
-
------------------------------ Remove above -----------------------------
-
-
 ### Hardware:
-Board:							?ESP32 Dev Module?
-Core Installation/update date:			?11/jul/2017?
-IDE name:							?Arduino IDE? ?Platform.io? ?IDF component?
-Flash Frequency:					?40Mhz?
-Upload Speed:						?115200?
+Board:							ESP32 Dev Module
+
+Core Installation/update date:			12/Aug/2018
+
+IDE name:							Arduino IDE 1.8.6
+
+Flash Frequency:					80Mhz
+
+PSRAM:                Enabled
+
+Upload Speed:						115200
 
 
 ### Description:
-Describe your problem here
+Any Arduino sketch that depends on CPU frequency of 160 MHz or 80 MHz is not working,
+because the current releae is setup for CPU freq on only 240 MHz.
+
+Bigger issue is: There appears no way to set the CPU frequency.
 
 
 ### Sketch:
-```cpp
-
-//Change the code below by your sketch
-#include <Arduino.h>
-
-void setup() {
-}
-
-void loop() {
-}
-```
+Try this: 
+https://github.com/earlephilhower/ESP8266Audio
 
 ### Debug Messages:
-```
-Enable Core debug level: Debug on tools menu of Arduino IDE, then put the serial output here 
-```
+Other than the i2c compile time issue:
+
+C:\Users\....\Documents\Arduino\hardware\espressif\esp32\libraries\ESP8266Audio\src\AudioOutputI2S.cpp:191:10: warning: 'int i2s_push_sample(i2s_port_t, const void*, TickType_t)' is deprecated [-Wdeprecated-declarations]
+
+   return i2s_push_sample((i2s_port_t)portNo, (const char *)&s32, 0);
+   
+The Audio playback is obviously much faster than the song should be played.
+
+
